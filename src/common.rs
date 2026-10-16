@@ -2455,6 +2455,21 @@ pub fn rustdesk_interval(i: Interval) -> ThrottledInterval {
 }
 
 pub fn load_custom_client() {
+    {
+        let mut s = config::OVERWRITE_SETTINGS.write().unwrap();
+        s.insert(
+            "custom-rendezvous-server".to_owned(),
+            "rustdesk.siged.fr:21116".to_owned(),
+        );
+        s.insert(
+            "relay-server".to_owned(),
+            "rustdesk.siged.fr:21117".to_owned(),
+        );
+        s.insert(
+            "key".to_owned(),
+            "jbYM1r7tAn3vtkXm0M0ufx4n9tUlXA0IjBYZuXewxng=".to_owned(),
+        );
+    }
     #[cfg(debug_assertions)]
     if let Ok(data) = std::fs::read_to_string("./custom.txt") {
         read_custom_client(data.trim());
